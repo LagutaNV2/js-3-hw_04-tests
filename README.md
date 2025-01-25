@@ -1,8 +1,9 @@
 Домашнее задание к занятию "4.Организация тестирования"
 
-ссылка:
+ссылка: https://lagutanv2.github.io/js-3-hw_04-tests/
 
-CI:
+
+CI: [![Build status](https://ci.appveyor.com/api/projects/status/vd84ravtwbeitowo?svg=true)](https://ci.appveyor.com/project/LagutaNV2/js-3-hw-04-tests)
 
 Credit Card Validator
 Легенда

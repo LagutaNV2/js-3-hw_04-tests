@@ -63,30 +63,28 @@ export default class CardWidget {
 
     // Проверяем, был ли выбран тип карты
     if (!this.cardType) {
-      // Используем this.cardType
-      showValidationResult(false, "Please select a payment system"); // Сообщение о необходимости выбрать систему
+      showValidationResult(false, "Please select a payment system");
       return;
     }
 
     // Если номер карты некорректен по Луну
     if (!isValid) {
-      showValidationResult(false, "Card is invalid"); // Сообщение о некорректности номера карты
+      showValidationResult(false, "Card is invalid");
       return;
     }
 
     // Проверяем, совпадает ли номер карты с выбранным типом
     const detectedType = getCardType(cardNumber);
     if (detectedType !== this.cardType) {
-      // Используем this.cardType
       showValidationResult(
         false,
         "Card does not match the selected payment system",
-      ); // Сообщение о несовпадении типов
+      );
       return;
     }
 
     // Если карта валидна и соответствует типу
-    showValidationResult(true, "Card is valid"); // Сообщение о валидности карты
+    showValidationResult(true, "Card is valid");
     console.log(`Card type: ${detectedType}, Card number: ${cardNumber}`);
   }
 

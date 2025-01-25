@@ -1,8 +1,9 @@
 import { getCardType } from "./cardType";
 
 export function isValidLuhn(cardNumber) {
+  //  Проверка пустых строк или недопустимых символов
   if (!cardNumber || !/^\d+$/.test(cardNumber)) {
-    return false; // Возвращаем false для пустых строк или недопустимых символов
+    return false;
   }
 
   // Проверка длины номера карты

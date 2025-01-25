@@ -1,0 +1,114 @@
+/* Контейнер формы */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Секция значков карт */
+.card-icons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.card-icon {
+  width: 50px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.card-icon.active {
+  opacity: 1;
+}
+
+/* Фоновые изображения для иконок */
+.card-icon.visa {
+  background-image: url("../img/Visa.png");
+}
+
+.card-icon.mastercard {
+  background-image: url("../img/MasterCard.png");
+}
+
+.card-icon.american-express {
+  background-image: url("../img/AmericanExpress.png");
+}
+
+.card-icon.discover {
+  background-image: url("../img/Discover.png");
+}
+
+.card-icon.jcb {
+  background-image: url("../img/JCB.png");
+}
+
+.card-icon.diners-club {
+  background-image: url("../img/DinersClub.png");
+}
+
+.card-icon.mir {
+  background-image: url("../img/Mir.png");
+}
+
+/* Строка ввода и кнопка */
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+#card-number {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#validate-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#validate-btn:hover {
+  background-color: #45a049;
+}
+
+/* Сообщение результата валидации */
+.validation-message {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.validation-message.valid {
+  color: #4CAF50;
+}
+
+.validation-message.invalid {
+  color: #F44336;
+}

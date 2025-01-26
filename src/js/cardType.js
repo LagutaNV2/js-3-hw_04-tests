@@ -17,7 +17,7 @@ export function getCardType(cardNumber) {
 
   for (const [type, pattern] of Object.entries(patterns)) {
     if (pattern.test(cardNumber)) {
-      console.log("определен тип карты:", type);
+      // console.log("определен тип карты:", type);
       return type;
     }
   }

@@ -7,14 +7,35 @@ describe("test cards numbers", () => {
   let page = null;
   const baseUrl = "http://localhost:9030";
 
-  beforeEach(async () => {
-    browser = await puppeteer.launch({
-      headless: false,
-      slowMo: 100,
-      devtools: true,
+  // beforeEach(async () => {
+  //   browser = await puppeteer.launch({
+  //     headless: false,
+  //     slowMo: 100,
+  //     devtools: true,
+  //   });
+  //   page = await browser.newPage();
+  // });
+
+  beforeAll(async () => {
+    // server = await childProcess.fork("./server.js");
+    server = await childProcess.fork(`${__dirname}/e2e.server.js`);
+
+    await new Promise((resolve, reject) => {
+      server.on("error", () => {
+        reject();
+      });
+
+      server.on("message", (message) => {
+        if (message === "ok") {
+          resolve();
+        }
+      });
     });
+
+    browser = await puppeteer.launch({});
+
     page = await browser.newPage();
-  });
+  }
 
   test("should validate a valid card number", async () => {
     await page.goto(baseUrl, { waitUntil: "networkidle2" }); // гарантирует, что страница полностью загрузится
@@ -60,8 +81,12 @@ describe("test cards numbers", () => {
     expect(message).toBe("Card is invalid");
   });
 
-  afterEach(async () => {
+  // afterEach(async () => {
+  //   await browser.close();
+  // });
+  afterAll(async () => {
     await browser.close();
+    Server.kill();
   });
 
 });

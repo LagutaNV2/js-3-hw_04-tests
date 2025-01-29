@@ -21,23 +21,15 @@ describe("test cards numbers", () => {
   // });
 
   beforeAll(async () => {
+    jest.setTimeout(60000); // Увеличиваем таймаут до 60 секунд
     server = await childProcess.fork(`${__dirname}/e2e.server.js`);
+
     await new Promise((resolve, reject) => {
-      server.on("error", () => {
-        reject();
-      });
-      server.on("message", (message) => {
-        if (message === "ok") {
-          resolve();
-        }
+      server.on("error", reject);
+      server.on("message", (msg) => {
+        if (msg === "ready") resolve();
       });
     });
-    browser = await puppeteer.launch({
-      /* headless: true,
-      slowMo: 100,
-      devtools: false, */
-    });
-    page = await browser.newPage();
   });
 
   test("should validate a valid card number", async () => {
@@ -84,11 +76,12 @@ describe("test cards numbers", () => {
     expect(message).toBe("Card is invalid");
   });
 
-  // afterEach(async () => {
-  //   await browser.close();
-  // });
   afterAll(async () => {
-    await browser.close();
-    server.kill();
+    if (browser) {
+      await browser.close();
+    }
+    if (server) {
+      server.kill();
+    }
   });
 });

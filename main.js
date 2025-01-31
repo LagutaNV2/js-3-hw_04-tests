@@ -1,12 +1,12 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-var __webpack_exports__ = {};
 
-;// CONCATENATED MODULE: ./src/js/cardValidator.js
+;// ./src/js/cardValidator.js
 
 function isValidLuhn(cardNumber) {
+  //  Проверка пустых строк или недопустимых символов
   if (!cardNumber || !/^\d+$/.test(cardNumber)) {
-    return false; // Возвращаем false для пустых строк или недопустимых символов
+    return false;
   }
 
   // Проверка длины номера карты
@@ -26,7 +26,7 @@ function isValidLuhn(cardNumber) {
   }
   return sum % 10 === 0;
 }
-;// CONCATENATED MODULE: ./src/js/cardType.js
+;// ./src/js/cardType.js
 
 function getCardType(cardNumber) {
   if (!isValidLuhn(cardNumber)) {
@@ -43,13 +43,13 @@ function getCardType(cardNumber) {
   };
   for (const [type, pattern] of Object.entries(patterns)) {
     if (pattern.test(cardNumber)) {
-      console.log("определен тип карты:", type);
+      // console.log("определен тип карты:", type);
       return type;
     }
   }
   // return null;
 }
-;// CONCATENATED MODULE: ./src/js/domWidget.js
+;// ./src/js/domWidget.js
 
 
 class CardWidget {
@@ -105,27 +105,25 @@ class CardWidget {
 
     // Проверяем, был ли выбран тип карты
     if (!this.cardType) {
-      // Используем this.cardType
-      showValidationResult(false, "Please select a payment system"); // Сообщение о необходимости выбрать систему
+      showValidationResult(false, "Please select a payment system");
       return;
     }
 
     // Если номер карты некорректен по Луну
     if (!isValid) {
-      showValidationResult(false, "Card is invalid"); // Сообщение о некорректности номера карты
+      showValidationResult(false, "Card is invalid");
       return;
     }
 
     // Проверяем, совпадает ли номер карты с выбранным типом
     const detectedType = getCardType(cardNumber);
     if (detectedType !== this.cardType) {
-      // Используем this.cardType
-      showValidationResult(false, "Card does not match the selected payment system"); // Сообщение о несовпадении типов
+      showValidationResult(false, "Card does not match the selected payment system");
       return;
     }
 
     // Если карта валидна и соответствует типу
-    showValidationResult(true, "Card is valid"); // Сообщение о валидности карты
+    showValidationResult(true, "Card is valid");
     console.log(`Card type: ${detectedType}, Card number: ${cardNumber}`);
   }
   clearValidationMessage() {
@@ -146,7 +144,7 @@ function showValidationResult(isValid, message) {
     messageEl.classList.remove("valid");
   }
 }
-;// CONCATENATED MODULE: ./src/js/app.js
+;// ./src/js/app.js
 // TODO: write code here
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -154,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = new CardWidget(container);
   form.bindToDOM();
 });
-;// CONCATENATED MODULE: ./src/index.js
+;// ./src/index.js
 
 
 

@@ -9,7 +9,7 @@ describe("test cards numbers", () => {
   let page = null;
   let server = null;
 
-  const baseUrl = "http://localhost:9000";
+  const baseUrl = "http://localhost:9030";
 
   // beforeEach(async () => {
   //   browser = await puppeteer.launch({
@@ -30,6 +30,23 @@ describe("test cards numbers", () => {
         if (msg === "ready") resolve();
       });
     });
+
+    browser = await puppeteer.launch({
+      // headless: false,
+      // slowMo: 100,
+      // devtools: true,
+    });
+
+    page = await browser.newPage();
+  });
+
+  afterAll(async () => {
+    //if (browser) {
+    await browser.close();
+    //}
+    //if (server) {
+    server.kill();
+    //}
   });
 
   test("should validate a valid card number", async () => {
@@ -74,14 +91,5 @@ describe("test cards numbers", () => {
       (el) => el.textContent,
     );
     expect(message).toBe("Card is invalid");
-  });
-
-  afterAll(async () => {
-    if (browser) {
-      await browser.close();
-    }
-    if (server) {
-      server.kill();
-    }
   });
 });
